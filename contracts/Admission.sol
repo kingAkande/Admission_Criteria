@@ -1,34 +1,55 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.24;
 
-// Uncomment this line to use console.log
-// import "hardhat/console.sol";
+contract AdmissionCriteria{
 
-contract Lock {
-    uint public unlockTime;
-    address payable public owner;
 
-    event Withdrawal(uint amount, uint when);
+        struct Biodatas {
 
-    constructor(uint _unlockTime) payable {
-        require(
-            block.timestamp < _unlockTime,
-            "Unlock time should be in the future"
-        );
+            string  Name;
+            uint256    Age;
+            uint256    EntryScore;
 
-        unlockTime = _unlockTime;
-        owner = payable(msg.sender);
+        }
+
+
+         Biodatas[] public list;
+
+
+function setlist(string memory _name ,uint256 _age, uint256 _score)external {
+
+        list.push(Biodatas(_name, _age, _score ));
+
+}
+
+function All_intake()external view returns (Biodatas[] memory){
+    
+return  list;
+
+}
+
+function checkAgeEligibility( uint256 index) external view   {
+
+            if( list[index].Age <= 5){
+
+                revert("not up to age");
+}
+
+}
+
+function entryScoreCheck(uint256 index)external view {
+
+            require( list[index].EntryScore <= 50, "not up to average" );
+
+
+} 
+
+ bool public ailment;
+
+    function ailmentcheck() public view {
+        
+        assert(ailment == false);
     }
 
-    function withdraw() public {
-        // Uncomment this line, and the import of "hardhat/console.sol", to print a log in your terminal
-        // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
 
-        require(block.timestamp >= unlockTime, "You can't withdraw yet");
-        require(msg.sender == owner, "You aren't the owner");
-
-        emit Withdrawal(address(this).balance, block.timestamp);
-
-        owner.transfer(address(this).balance);
-    }
 }
