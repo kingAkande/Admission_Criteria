@@ -1,13 +1,13 @@
-# Sample Hardhat Project
+# Student Admission Smart Contract
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This smart contract determines the eligibility of students seeking admission to a school. 
 
-Try running some of the following tasks:
+The following criteria are considered:
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
-```
+1. Age: Students must be above the age of 5. 
+2. Entry Score: Students should score above 50 in the entry exam.
+3. Ailment (Health Issues) : Students must not have any special ailments.
+
+The smart contract validates these criteria using error handlers.
+
+If a student meets all the requirements, they are eligible for admission.
