@@ -39,7 +39,7 @@ function checkAgeEligibility( uint256 index) external view   {
 
 function entryScoreCheck(uint256 index)external view {
 
-            require( list[index].EntryScore <= 50, "not up to average" );
+            require( list[index].EntryScore >= 50, "not up to average" );
 
 
 } 
